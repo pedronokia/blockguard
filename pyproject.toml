@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rateguard"
+version = "0.1.0"
+description = "A circuit breaker for undocumented, server-imposed rate limits."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+authors = [{ name = "Pedro" }]
+keywords = ["rate-limit", "circuit-breaker", "backoff", "scraping", "resilience"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.entry-points.pytest11]
+rateguard = "rateguard.pytest_plugin"
+
+[project.urls]
+Homepage = "https://github.com/REPLACE_ME/rateguard"
+Issues = "https://github.com/REPLACE_ME/rateguard/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
