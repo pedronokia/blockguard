@@ -1,11 +1,11 @@
-"""Dogfoods rateguard.pytest_plugin: a breaker tracked via ``track()`` must
+"""Dogfoods blockguard.pytest_plugin: a breaker tracked via ``track()`` must
 come back clean in the NEXT test, even though a previous test tripped it.
 Order matters here -- these two tests rely on running in file order,
 which pytest does by default within a single file."""
 from __future__ import annotations
 
-from rateguard import CircuitBreaker
-from rateguard.pytest_plugin import track
+from blockguard import CircuitBreaker
+from blockguard.pytest_plugin import track
 
 shared = track(CircuitBreaker(base_cooldown_s=60.0))
 

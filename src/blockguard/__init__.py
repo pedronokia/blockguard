@@ -1,4 +1,4 @@
-"""rateguard -- a circuit breaker for undocumented, server-imposed rate limits."""
+"""blockguard -- a circuit breaker for undocumented, server-imposed rate limits."""
 from __future__ import annotations
 
 from .breaker import CircuitBreaker, InCooldownError

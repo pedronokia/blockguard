@@ -6,7 +6,7 @@ import time
 
 import pytest
 
-from rateguard import CircuitBreaker, InCooldownError
+from blockguard import CircuitBreaker, InCooldownError
 
 
 def make_breaker(base=0.05, cap=0.2):

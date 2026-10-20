@@ -13,7 +13,7 @@ import time
 import urllib.error
 import urllib.request
 
-from rateguard import CircuitBreaker, InCooldownError
+from blockguard import CircuitBreaker, InCooldownError
 
 ALLOWED_REQUESTS = 3
 

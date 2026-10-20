@@ -9,13 +9,13 @@ This bit a real production codebase hard enough to break 13 tests in a
 chain before the root cause was found -- this fixture is that fix,
 shipped as part of the library instead of hand-rolled per project.
 
-Usage: add ``rateguard`` to your pytest plugins (most test setups pick
+Usage: add ``blockguard`` to your pytest plugins (most test setups pick
 it up automatically once the package is installed, since it registers
 via the ``pytest11`` entry point declared in ``pyproject.toml``), then
 depend on breakers via a fixture of your own that also clears them, or
 track instances explicitly:
 
-    from rateguard.pytest_plugin import track
+    from blockguard.pytest_plugin import track
 
     breaker = CircuitBreaker()
     track(breaker)  # now reset_all() is called on it before/after each test
