@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "blockguard"
-version = "0.1.0"
+version = "0.1.1"
 description = "A circuit breaker for undocumented, server-imposed rate limits."
 readme = "README.md"
 license = "MIT"
@@ -26,6 +26,11 @@ dev = ["pytest>=7"]
 
 [project.entry-points.pytest11]
 blockguard = "blockguard.pytest_plugin"
+
+[project.urls]
+Homepage = "https://github.com/pdrleite/blockguard"
+Source = "https://github.com/pdrleite/blockguard"
+Issues = "https://github.com/pdrleite/blockguard/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
