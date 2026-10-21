@@ -1,5 +1,8 @@
 # blockguard
 
+[![tests](https://github.com/pedronokia/blockguard/actions/workflows/tests.yml/badge.svg)](https://github.com/pedronokia/blockguard/actions/workflows/tests.yml)
+[![PyPI](https://img.shields.io/pypi/v/blockguard)](https://pypi.org/project/blockguard/)
+
 A circuit breaker for rate limits the *other* server imposes on you —
 not a client-side throttle for your own call rate.
 
