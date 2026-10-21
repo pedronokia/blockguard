@@ -61,6 +61,41 @@ Keys ("families") are independent: tripping `"inventory"` never affects
 `"search"`. Use one key per logical endpoint/rate-limit budget, not one
 global key for your whole app.
 
+## Using it inside an AI agent's tools
+
+Agents retry. When a tool call fails, the model tends to call the same tool
+again, several times in a row and faster than a person would. If the API
+behind the tool is already rate-limiting you, every retry can extend the
+block. Check the breaker inside the tool and give the model a plain answer
+instead of sending the request:
+
+```python
+from blockguard import CircuitBreaker
+
+breaker = CircuitBreaker()
+
+def get_price(item: str) -> str:
+    """Tool exposed to the agent. Never raises; always returns text."""
+    if breaker.in_cooldown("prices_api"):
+        wait = breaker.seconds_remaining("prices_api")
+        return f"Rate limited. Don't call get_price again for {wait:.0f}s."
+    resp = call_prices_api(item)
+    if resp.status_code == 429:
+        breaker.trip("prices_api")
+        return "The prices API returned 429. Don't retry yet."
+    breaker.clear("prices_api")
+    return resp.text
+```
+
+The message helps a model that reads it, and the check protects you from
+one that doesn't: no request reaches the API until the cooldown ends, however
+many times the agent calls the tool. Since the tool is a plain function that
+returns text, it fits frameworks that expose Python functions as tools.
+
+`examples/agent_tool_demo.py` runs this against a local toy server with a
+fake agent loop that retries every failure three times. No LLM or API key is
+needed. In that run, the agent makes 12 tool calls and 4 reach the API.
+
 ## Testing with blockguard in your own test suite
 
 A breaker that lives at module/app scope persists across your whole test

@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "blockguard"
-version = "0.1.1"
+version = "0.1.2"
 description = "A circuit breaker for undocumented, server-imposed rate limits."
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.9"
 authors = [{ name = "Pedro" }]
-keywords = ["rate-limit", "circuit-breaker", "backoff", "scraping", "resilience"]
+keywords = ["rate-limit", "circuit-breaker", "backoff", "scraping", "resilience", "ai-agents", "llm", "tool-calling"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
