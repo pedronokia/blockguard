@@ -113,6 +113,18 @@ from blockguard.pytest_plugin import track
 breaker = track(CircuitBreaker())  # now reset between every test, automatically
 ```
 
+## Why not an existing circuit breaker library
+
+General-purpose Python circuit breakers (`fabfuel/circuitbreaker`, for
+example) trip on a failure *count* and reopen after a fixed recovery
+timeout — built for "is this service healthy", not for a block that gets
+*longer* the more you poke it. `blockguard` doubles the cooldown on each
+repeated trip (capped), because that's the actual shape of the problem:
+retrying during a block tends to extend it, so the backoff needs to grow
+with it. It's also zero-dependency and keyed per endpoint out of the box,
+rather than a general toolkit (like `kstlib`, which bundles a breaker with
+a separate token-bucket limiter) you'd configure down to this shape.
+
 ## What this is *not* (yet)
 
 v0.1 is deliberately small: an in-memory, single-process breaker, no
